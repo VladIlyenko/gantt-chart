@@ -61,12 +61,15 @@
 
     // Save updates using CORS-safe GET with query string
     gantt.attachEvent("onAfterTaskUpdate", function(id, task) {
-      const params = new URLSearchParams({ ...task, mode: "update" }).toString();
-      fetch(`${scriptURL}?${params}`)
-        .then(res => res.text())
-        .then(msg => console.log("✅ Saved:", msg)) // should say "Updated"
-        .catch(err => console.error("❌ Save error:", err));
-    });
+  const params = new URLSearchParams({ ...task, mode: "update" }).toString();
+  const fullURL = `${scriptURL}?${params}`;
+  console.log("📡 Sending update to:", fullURL); // Log full URL
+  fetch(fullURL)
+    .then(res => res.text())
+    .then(msg => console.log("✅ Saved:", msg))
+    .catch(err => console.error("❌ Save error:", err));
+});
+
   </script>
 </body>
 </html>
