@@ -22,8 +22,6 @@
 
   <script>
     const scriptURL = "https://script.google.com/macros/s/AKfycbx9GX4wt4OoDHXYq-tFSJfW3O16Sg-qTi3l8LMFC_6KKDQ8XXC4L-y87UQDnkbetgmPww/exec"; // e.g. https://script.google.com/macros/s/AKfycb.../exec
-    const proxyURL = "https://corsproxy.io/?";
-    const fullURL = proxyURL + encodeURIComponent(scriptURL);
     
     gantt.config.xml_date = "%d-%m-%Y";
     gantt.config.work_time = true;
@@ -63,15 +61,15 @@
 
     // Save updates using CORS-safe GET with query string
     gantt.attachEvent("onAfterTaskUpdate", function(id, task) {
-  const proxiedURL = `https://corsproxy.io/?${encodeURIComponent(scriptURL)}`;
-  console.log("📡 Sending task update via POST (with proxy):", task);
+  const proxy = "https://hook.eu.r.appspot.com/";
+  const fullURL = proxy + scriptURL;
 
-  fetch(proxiedURL, {
+  console.log("📡 Sending task update via POST (hook proxy):", task);
+
+  fetch(fullURL, {
     method: "POST",
-    body: JSON.stringify(task),
-    headers: {
-      "Content-Type": "application/json"
-    }
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(task)
   })
   .then(res => res.text())
   .then(msg => console.log("✅ POST Saved:", msg))
