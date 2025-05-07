@@ -64,7 +64,7 @@
       const params = new URLSearchParams({ ...task, mode: "update" }).toString();
       fetch(`${scriptURL}?${params}`)
         .then(res => res.text())
-        .then(msg => console.log("✅ Saved:", msg))
+        .then(msg => console.log("✅ Saved:", msg)) // should say "Updated"
         .catch(err => console.error("❌ Save error:", err));
     });
   </script>
