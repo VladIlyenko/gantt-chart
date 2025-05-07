@@ -51,7 +51,7 @@
     gantt.init("gantt_here");
 
     // Load tasks from Apps Script
-    fetch(scriptURL)
+    fetch(https://script.google.com/macros/s/AKfycbx9GX4wt4OoDHXYq-tFSJfW3O16Sg-qTi3l8LMFC_6KKDQ8XXC4L-y87UQDnkbetgmPww/exec)
       .then(res => res.json())
       .then(tasks => {
         console.log("Loaded tasks", tasks);
@@ -62,7 +62,7 @@
     // Save updates using CORS-safe GET with query string
     gantt.attachEvent("onAfterTaskUpdate", function(id, task) {
       const params = new URLSearchParams({ ...task, mode: "update" }).toString();
-      fetch(`${scriptURL}?${params}`)
+      fetch(`${https://script.google.com/macros/s/AKfycbx9GX4wt4OoDHXYq-tFSJfW3O16Sg-qTi3l8LMFC_6KKDQ8XXC4L-y87UQDnkbetgmPww/exec}?${params}`)
         .then(res => res.text())
         .then(msg => console.log("✅ Saved:", msg))
         .catch(err => console.error("❌ Save error:", err));
