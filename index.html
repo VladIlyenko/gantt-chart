@@ -29,14 +29,16 @@
   gantt.setWorkTime({ day: 6, hours: false }); // Saturday
   gantt.config.duration_unit = "day";
 
-  gantt.config.lightbox.sections = [
-    { name: "description", height: 40, map_to: "text", type: "textarea" },
-    { name: "assignee", height: 30, map_to: "assignee", type: "textarea" },
-    { name: "task_type", height: 30, map_to: "task_type", type: "textarea" },
-    { name: "tool", height: 30, map_to: "tool", type: "textarea" },
-    { name: "time", type: "duration", map_to: "auto" }
-  ];
-
+  gantt.config.columns = [
+  { name: "text", label: "Task", tree: true, width: '*' },
+  { name: "assignee", label: "Assignee", align: "center", width: 100 },
+  { name: "task_type", label: "Type", align: "center", width: 80 },
+  { name: "tool", label: "Tool", align: "center", width: 100 },
+  { name: "start_date", label: "Start", align: "center", width: 80 },
+  { name: "end_date", label: "End", align: "center", width: 80 },
+  { name: "duration", label: "Days", align: "center", width: 60 }
+];
+    
   gantt.init("gantt_here");
 
   fetch("https://script.google.com/macros/s/AKfycbx9GX4wt4OoDHXYq-tFSJfW3O16Sg-qTi3l8LMFC_6KKDQ8XXC4L-y87UQDnkbetgmPww/exec")
