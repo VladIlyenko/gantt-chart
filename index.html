@@ -50,15 +50,14 @@
     .catch(err => console.error("Failed to load tasks:", err));
 
     gantt.attachEvent("onAfterTaskUpdate", function(id, task) {
-  fetch("https://script.google.com/macros/s/AKfycbx9GX4wt4OoDHXYq-tFSJfW3O16Sg-qTi3l8LMFC_6KKDQ8XXC4L-y87UQDnkbetgmPww/exec", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(task)
-  })
+  
+      const params = new URLSearchParams(task).toString();
+
+fetch("https://script.google.com/macros/s/AKfycbx9GX4wt4OoDHXYq-tFSJfW3O16Sg-qTi3l8LMFC_6KKDQ8XXC4L-y87UQDnkbetgmPww/exec?" + params)
   .then(res => res.text())
   .then(msg => console.log("✅ Saved:", msg))
   .catch(err => console.error("❌ Save error:", err));
-});
+
 
 </script>
 
