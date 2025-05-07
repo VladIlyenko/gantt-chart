@@ -22,7 +22,9 @@
 
   <script>
     const scriptURL = "https://script.google.com/macros/s/AKfycbx9GX4wt4OoDHXYq-tFSJfW3O16Sg-qTi3l8LMFC_6KKDQ8XXC4L-y87UQDnkbetgmPww/exec"; // e.g. https://script.google.com/macros/s/AKfycb.../exec
-
+    const proxyURL = "https://corsproxy.io/?";
+    const fullURL = proxyURL + encodeURIComponent(scriptURL);
+    
     gantt.config.xml_date = "%d-%m-%Y";
     gantt.config.work_time = true;
     gantt.config.skip_off_time = true;
@@ -63,13 +65,13 @@
     gantt.attachEvent("onAfterTaskUpdate", function(id, task) {
   console.log("📡 Sending task update via POST:", task);
 
-  fetch(scriptURL, {
-    method: "POST",
-    body: JSON.stringify(task),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
+  fetch(fullURL, {
+  method: "POST",
+  body: JSON.stringify(task),
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
   .then(res => res.text())
   .then(msg => console.log("✅ POST Saved:", msg))
   .catch(err => console.error("❌ POST Save error:", err));
